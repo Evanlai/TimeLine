@@ -14,6 +14,8 @@ import UIKit
     
     var unit_hour_height: CGFloat = 30
     
+    var currDate: Date = Date();
+    
     override func layoutSubviews() {
         
         super.layoutSubviews()
@@ -23,49 +25,60 @@ import UIKit
     internal func drawEvent(_ rect: CGRect) {
         
         for i in 0..<10 {
-            
-//            let start = Date(timeIntervalSince1970: i == 0 ? 1672388400 : 1672389400)
-//
-//            let end = Date(timeIntervalSince1970: i == 0 ? 1672388920 : 1672399920)
-            
+
             let start = Date(timeIntervalSince1970:TimeInterval(1672388400+(1000 * (i + i))))
 
             let end = Date(timeIntervalSince1970:TimeInterval(1672388920+(1000 * (i + i))))
-            
-            let unit_gap_height = CGFloat(20)
-            
-            let unit_minute_width = unit_hour_width / 6 / 10
-            
-            let unit_minute_height = CGFloat(unit_hour_height / 2)
-            
-            let unit_second_width = unit_minute_width / 10
-            
-            let unit_sec_height = CGFloat(unit_minute_height / 2)
-            
-            let wave_height = CGFloat(5)
-            
-            let start_hour = Calendar.current.component(.hour, from: start)
-            
-            let start_minute = Double(Calendar.current.component(.minute, from: start))
-            
-            let start_second = Double(Calendar.current.component(.second, from: start))
-            
-            let end_hour = Calendar.current.component(.hour, from: end)
-            
-            let end_minute = Double(Calendar.current.component(.minute, from: end))
-            
-            let end_second = Double(Calendar.current.component(.second, from: end))
-            
-            // 縮放時要加入這個值在 start_x , 因為 rect 會隨著縮放時的倍率增加，我們畫上的event才會跟著縮放.
-            let unit_page = rect.width / 3
-            
-            let start_x = (unit_hour_width * CGFloat(start_hour)) + (unit_minute_width * CGFloat(start_minute)) + (unit_second_width * CGFloat(start_second / 6))
 
-            let end_x = (unit_hour_width * CGFloat(end_hour)) + (unit_minute_width * CGFloat(end_minute)) + (unit_second_width * CGFloat(end_second / 6))
+            //初始化日期格式器
+            let dformatter = DateFormatter()
+            dformatter.dateFormat = "yyyyMMdd"
+             
+            //开始比较
+            if dformatter.string(from: start) == dformatter.string(from: self.currDate) {
+                print("它们是同一天")
+                
+                let unit_gap_height = CGFloat(20)
+                
+                let unit_minute_width = unit_hour_width / 6 / 10
+                
+                let unit_minute_height = CGFloat(unit_hour_height / 2)
+                
+                let unit_second_width = unit_minute_width / 10
+                
+                let unit_sec_height = CGFloat(unit_minute_height / 2)
+                
+                let wave_height = CGFloat(5)
+                
+                let start_hour = Calendar.current.component(.hour, from: start)
+                
+                let start_minute = Double(Calendar.current.component(.minute, from: start))
+                
+                let start_second = Double(Calendar.current.component(.second, from: start))
+                
+                let end_hour = Calendar.current.component(.hour, from: end)
+                
+                let end_minute = Double(Calendar.current.component(.minute, from: end))
+                
+                let end_second = Double(Calendar.current.component(.second, from: end))
+                
+                // 縮放時要加入這個值在 start_x , 因為 rect 會隨著縮放時的倍率增加，我們畫上的event才會跟著縮放.
+                let unit_page = rect.width / 3
+                
+                let start_x = (unit_hour_width * CGFloat(start_hour)) + (unit_minute_width * CGFloat(start_minute)) + (unit_second_width * CGFloat(start_second / 6))
+
+                let end_x = (unit_hour_width * CGFloat(end_hour)) + (unit_minute_width * CGFloat(end_minute)) + (unit_second_width * CGFloat(end_second / 6))
+                
+                UIColor.blue.setFill()
+                
+                UIRectFill(CGRect(x: start_x + unit_page, y: rect.size.height - wave_height - unit_gap_height, width: end_x - start_x, height: wave_height))
+                
+            }else {
+                print("它们不是同一天")
+            }
             
-            UIColor.blue.setFill()
             
-            UIRectFill(CGRect(x: start_x + unit_page, y: rect.size.height - wave_height - unit_gap_height, width: end_x - start_x, height: wave_height))
+            
             
             
         }
@@ -204,4 +217,14 @@ import UIKit
         
     }
 
+}
+
+extension Date {
+    
+    func isBetween(_ date1: Date, and date2: Date) -> Bool {
+        
+        return (min(date1, date2) ... max(date1, date2)).contains(self)
+        
+    }
+    
 }

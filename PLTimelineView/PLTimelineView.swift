@@ -106,6 +106,8 @@ import UIKit
             
             self.currentDate = current_date
             
+            self.contentView.rulerView.currDate = current_date
+            
             if self.loupeView.isHidden == true {
                 
                 (self.delegate as? PLTimelineDelegate)?.timeline(self, didScrollTo: self.currentDate)
@@ -117,7 +119,7 @@ import UIKit
         
         
     }
-    
+        
     // MARK: Public Methods
     
     func gotoDate(_ date: Date) {

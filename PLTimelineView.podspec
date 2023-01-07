@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "PLTimelineView"
   spec.version      = "0.0.1"
-  spec.summary      = "A short description of PLTimelineView."
+  spec.summary      = "Work Use TimeLine UI And Function."
   spec.swift_version = "8.0"
 
   # This description is used to generate tags and improve search results.
@@ -25,9 +25,7 @@ Pod::Spec.new do |spec|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  spec.description  = <<-DESC
-                   DESC
-
+  spec.description  = "GVTimeLineTest"
   spec.homepage     = "https://github.com/Evanlai/TimeLine"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
@@ -39,7 +37,7 @@ Pod::Spec.new do |spec|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  spec.license      = "MIT (example)"
+  spec.license      = "MIT"
   # spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 
 
@@ -65,10 +63,10 @@ Pod::Spec.new do |spec|
   #
 
   # spec.platform     = :ios
-  # spec.platform     = :ios, "5.0"
+   spec.platform     = :ios, "9.0"
 
   #  When using multiple platforms
-  # spec.ios.deployment_target = "10.0"
+  # spec.ios.deployment_target = "9.0"
   # spec.osx.deployment_target = "10.7"
   # spec.watchos.deployment_target = "2.0"
   # spec.tvos.deployment_target = "9.0"
@@ -91,7 +89,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Pod/Classes/**/*.{h,m}"
+  spec.source_files  = "Classes", "PLTimelineView/**/*.{h,m}"
   spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
